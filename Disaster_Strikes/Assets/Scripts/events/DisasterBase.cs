@@ -61,7 +61,7 @@ public class DisasterBase : MonoBehaviour
     
     IEnumerator PlayEvent()
     {
-        float delay = settings.spawnDuration / settings.spawnAmount;
+        float delay = spawnduration / settings.spawnAmount;
         for (int i = 0; i <= settings.spawnAmount; i++)
         {
             SpawnManager();
