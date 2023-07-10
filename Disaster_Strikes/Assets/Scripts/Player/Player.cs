@@ -8,8 +8,12 @@ public class Player : GameBehaviour
 
     [SerializeField]
     internal Rigidbody2D rb;
-    internal bool Isgrounded;
-
+    [SerializeField]
+    internal bool isGrounded;
+    [SerializeField]
+    internal BoxCollider2D boxcollider;
+    [SerializeField]
+    internal LayerMask platformLayerMask;
 
 
     internal override void Init()
