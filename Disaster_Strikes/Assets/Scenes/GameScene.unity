@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b495bf754b80c8149a18934709a60c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   settings: {fileID: 11400000, guid: 42783beadf1559d43ae0b0a61e8341ce, type: 2}
   SpawnedObject: {fileID: 5708700559997267558, guid: ebfd37cbd1f9fff4cbc1c476808a739b, type: 3}
   verticalSpawnLocation:

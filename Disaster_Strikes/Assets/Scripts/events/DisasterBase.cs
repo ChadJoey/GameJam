@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class DisasterBase : MonoBehaviour
@@ -24,12 +25,17 @@ public class DisasterBase : MonoBehaviour
     Coroutine StartEvent;
 
 
-    float delay;
+    float spawnduration;
+
+
     bool active = false;
 
 
     private void Start()
     {
+        spawnduration = settings.spawnDuration;
+        StartCoroutine(PlayEvent());
+        spawnduration = 2;
         StartCoroutine(PlayEvent());
     }
 
@@ -43,6 +49,7 @@ public class DisasterBase : MonoBehaviour
                 break;
                 //vertical from above
             case disasterType.vertical:
+                SpawnObject(verticalSpawnLocation[Random.Range(0, verticalSpawnLocation.Length)].transform);
                 break;
                 //horizontal and vertical
             case disasterType.all:
@@ -54,7 +61,7 @@ public class DisasterBase : MonoBehaviour
     
     IEnumerator PlayEvent()
     {
-        delay = settings.spawnDuration / settings.spawnAmount;
+        float delay = settings.spawnDuration / settings.spawnAmount;
         for (int i = 0; i <= settings.spawnAmount; i++)
         {
             SpawnManager();
