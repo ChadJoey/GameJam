@@ -9,12 +9,11 @@ public class TestFallingMeteor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb.AddForce(new Vector2(-1000, 100));
+        rb.AddForce(new Vector2(-100, 300));
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

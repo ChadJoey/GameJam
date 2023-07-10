@@ -5,20 +5,26 @@ using UnityEngine;
 public class DisasterBase : MonoBehaviour
 {
 
-    enum disasterType {horizontal, vertical, all};
+    enum disasterType { horizontal, vertical, all };
+    [SerializeField]
     disasterType type;
-    
+
+    [SerializeField]
     GameObject SpawnedObject;
 
+    [SerializeField]
+    Transform[] verticalSpawnLocation;
+    [SerializeField]
+    Transform[] horizontalSpawnLocation;
 
 
-
-    void SpawnObjects()
+    void SpawnManager()
     {
         switch (type)
         {
             //horizontal only from side
             case disasterType.horizontal:
+                //spawnLocation = 
                 break;
                 //vertical from above
             case disasterType.vertical:
@@ -29,4 +35,10 @@ public class DisasterBase : MonoBehaviour
         }
     }
 
+
+
+    void SpawnObject(Transform spawnLocation)
+    {
+        Instantiate(SpawnedObject, spawnLocation);
+    }
 }
