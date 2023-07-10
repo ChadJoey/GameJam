@@ -6,14 +6,28 @@ public class TestFallingMeteor : MonoBehaviour
 {
 
     public Rigidbody2D rb;
+
+    private Quaternion angle;
     // Start is called before the first frame update
     void Start()
     {
-        rb.AddForce(new Vector2(-100, 300));
+        rb.AddForce(new Vector2(-100, 600));
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        Vector2 dir = rb.velocity.normalized;
+        float magnitude = Mathf.Clamp01(rb.velocity.magnitude);
+        dir.Normalize();
+        transform.Translate(dir * 1 * magnitude * Time.deltaTime, Space.World);
+
+        if (dir != Vector2.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, dir);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 1000 * Time.deltaTime);
+        }
+
     }
 }
