@@ -6,18 +6,20 @@ public class TestFallingMeteor : MonoBehaviour
 {
 
     public Rigidbody2D rb;
-
+    [SerializeField]
+    float launchForce;
     private Quaternion angle;
-    // Start is called before the first frame update
+
+
     void Start()
     {
-        rb.AddForce(new Vector2(-100, 600));
+        Vector2 launchdirection = gameObject.transform.position + new Vector3(Random.Range(-30, 30), Random.Range(-3,3),0);
+        rb.AddForce(-launchdirection * launchForce);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-
         Vector2 dir = rb.velocity.normalized;
         float magnitude = Mathf.Clamp01(rb.velocity.magnitude);
         dir.Normalize();

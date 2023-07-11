@@ -26,6 +26,7 @@ public class DisasterBase : MonoBehaviour
 
 
     float spawnduration;
+    int spawnAmount;
 
 
     bool active = false;
@@ -34,6 +35,7 @@ public class DisasterBase : MonoBehaviour
     private void Start()
     {
         spawnduration = settings.spawnDuration;
+        spawnAmount = settings.spawnAmount;
         StartCoroutine(PlayEvent());
         spawnduration = 2;
         StartCoroutine(PlayEvent());
@@ -45,24 +47,32 @@ public class DisasterBase : MonoBehaviour
         {
             //horizontal only from side
             case disasterType.horizontal:
-                SpawnObject(horizontalSpawnLocation[Random.Range(0, horizontalSpawnLocation.Length)].transform);
+                SpawnObject(horizontalSpawnLocation[Random.Range(0, horizontalSpawnLocation.Length)].transform.position);
                 break;
                 //vertical from above
             case disasterType.vertical:
-                SpawnObject(verticalSpawnLocation[Random.Range(0, verticalSpawnLocation.Length)].transform);
+                SpawnObject(verticalSpawnLocation[Random.Range(0, verticalSpawnLocation.Length)].transform.position);
                 break;
                 //horizontal and vertical
             case disasterType.all:
+                int num = Random.Range(0, 2);
+                if (num == 0)
+                {
+                    SpawnObject(verticalSpawnLocation[Random.Range(0, verticalSpawnLocation.Length)].transform.position);
+                }
+                else
+                {
+                    SpawnObject(horizontalSpawnLocation[Random.Range(0, horizontalSpawnLocation.Length)].transform.position);
+                }
                 break;
         }
     }
 
 
-    
     IEnumerator PlayEvent()
     {
-        float delay = spawnduration / settings.spawnAmount;
-        for (int i = 0; i <= settings.spawnAmount; i++)
+        float delay = spawnduration / spawnAmount;
+        for (int i = 0; i <= spawnAmount; i++)
         {
             SpawnManager();
             yield return new WaitForSeconds(delay);
@@ -71,9 +81,9 @@ public class DisasterBase : MonoBehaviour
     }
 
 
-    void SpawnObject(Transform spawnLocation)
+    void SpawnObject(Vector3 spawnLocation)
     {
-        Instantiate(SpawnedObject, spawnLocation);
+        Instantiate(SpawnedObject, spawnLocation, SpawnedObject.transform.rotation);
     }
 
 
